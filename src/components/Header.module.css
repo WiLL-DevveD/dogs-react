@@ -1,0 +1,61 @@
+.header {
+  background-color: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo img {
+  width: 32px;
+  height: auto;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.logo img:hover {
+  opacity: 0.7;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.login:hover {
+  background-color: #f0f0f0;
+}
+
+.login::after{
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 17px;
+    background: url('../Assets/usuario.svg') no-repeat center center;
+    margin-left: 1rem;
+    position: relative;
+    top: 1px;
+}
