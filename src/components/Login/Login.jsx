@@ -1,13 +1,21 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes,Navigate } from 'react-router-dom'
 import LoginForm from './LoginForm'
 import LoginCreate from './LoginCreate'
 import LoginPwdLost from './LoginPwdLost'
 import LoginPwdReset from './LoginPwdReset'
+import { UserContext } from '../../UserContext'
+import styles from './Login.module.css'
 
 const Login = () => {
+  const {login} = React.useContext(UserContext);
+
+  if(login === true){
+    return <Navigate to="/conta" />
+  }
   return (
-    <div>
+    <section className={styles.login}>
+      <div className={styles.forms}>
       <Routes>
         <Route path='/' element={<LoginForm/>} />
         <Route path='criar' element={<LoginCreate/>} />
@@ -15,6 +23,7 @@ const Login = () => {
         <Route path='resetar' element={<LoginPwdReset/>} />
       </Routes>
       </div>
+      </section>
   )
 }
 

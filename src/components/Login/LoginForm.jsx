@@ -3,55 +3,47 @@ import { Link } from "react-router-dom";
 import Input from "../Forms/Input";
 import Button from "../Forms/Button";
 import useForm from "../../Hooks/useForm";
-import { TOKEN_POST } from "../../api";
+import { UserContext } from "../../UserContext";
+import Error from "../Helper/error";
+import styles from "./LoginForm.module.css";
+import stylesBtn from "../Forms/Button.module.css"; 
 
 function LoginForm() {
-  const username = useForm("email");
-  const password = useForm("password");
-
-  React.useEffect(() => {
-    const token = windoww.localStorage.getItem("token");
-    if (token) {
-      getUser(token);
-    }
-
-  },[])
-  
-  async function getUser(token) {
-    const {url, options} = USER_GET(token);
-    const response = await fetch (url, options);
-    const json = await response.json();
-    
-  }
+  const username = useForm(false);
+  const password = useForm(false);
+  const { userLogin, error, loading } = React.useContext(UserContext);
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     if (!username.validate() || !password.validate()) return;
-
-    const { url, options } = TOKEN_POST({
-      username: username.value,
-      password: password.value,
-    });
-    const response = await fetch(url, options);
-    const json = await response.json();
-    window.localStorage.setItem("token", json.token);
-   
+    userLogin(username.value, password.value);
   }
 
   return (
-    <section>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+    <section className="animeLeft">
+      <h1 className="title">Login</h1>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <Input label="Username" type="text" name="username" {...username} />
         <Input label="Password" type="password" name="password" {...password} />
-        <br />
-        <Button>Entrar</Button>
-        {/* <button type="submit">Login</button> */}
+        {loading ? (
+          <Button disabled>Carregando...</Button>
+        ) : (
+          <Button>Entrar</Button>
+        )}
+        <Error error={error} />
       </form>
-      <Link to="/login/perdeu">Perdeu a senha?</Link>
+      <Link className={styles.perdeu} to="/login/perdeu">
+        Perdeu a senha?
+      </Link>
       <br />
-      <Link to="/login/criar">Criar Conta</Link>
+      <div className={styles.cadastro}>
+        <h2 className={styles.subtitle}> Ainda não possui conta?</h2>
+        <p>ainda nao possui conta? cadastre-se no site</p>
+      </div>
+      <Link className={stylesBtn.button} to="/login/criar">
+        Criar Conta
+      </Link>
     </section>
   );
 }

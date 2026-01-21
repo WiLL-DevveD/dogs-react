@@ -25,10 +25,10 @@ const useForm = (type) => {
 
   function validate(value) {
     if (type == false) return true;
-    if (value.length === 0) {
-      setError("Preencha um valor");
-      return false;
-    }
+    // if (!value || value.length === 0) {
+    //   setError("Preencha um valor");
+    //   return false;
+    // }
     if (validation[type] && validation[type].regex.test(value)) {
         return true;
     }
