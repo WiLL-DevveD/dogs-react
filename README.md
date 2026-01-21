@@ -542,7 +542,7 @@ Login/
 
 ### Médio Prazo
 - [ ] Criar feed de posts
-- [ ] Implementar upload de fotos
+- [ ] Implementar upload de fotos 
 - [ ] Sistema de comentários
 - [ ] Página de perfil de usuário
 - [ ] Sistema de likes
